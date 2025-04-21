@@ -1,25 +1,21 @@
-# @ntf/<NAME>
+# @ntf/html
 
-Another <NAME> library
-
-## Why
-
-Because I like reinventing the wheel :)
+platform-independent HTML library
 
 ## Installation
 
 Use your favourite package manager, idk
 
 ```sh
-npm install @ntf/<NAME>
+npm install @ntf/html
 ```
 
 ```sh
-yarn add @ntf/<NAME>
+yarn add @ntf/html
 ```
 
 ```sh
-pnpm install @ntf/<NAME>
+pnpm install @ntf/html
 ```
 
 ## Usage
@@ -29,13 +25,13 @@ pnpm install @ntf/<NAME>
 This library can be used in `CommonJS` and `ESModule` environments
 
 ```typescript
-const { ... } = require("@ntf/<NAME>");
+const { ... } = require("@ntf/html");
 ```
 
 ```typescript
-import { ... } from "@ntf/<NAME>";
+import { ... } from "@ntf/html";
 ```
 
 ## License stuff that nobody reads
 
-Just like any [Open Source Project](https://github.com/N1ghtTheF0x/ntf-<NAME>) this has a [License](./LICENSE), the MIT License
+Just like any [Open Source Project](https://github.com/N1ghtTheF0x/ntf-html) this has a [License](./LICENSE), the MIT License
