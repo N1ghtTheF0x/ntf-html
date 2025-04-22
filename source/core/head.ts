@@ -1,4 +1,5 @@
 import { HTMLElement } from "../element"
+import { HTMLMetaElement, HTMLPropertyElement } from "../meta"
 
 function __charset__()
 {
@@ -20,21 +21,11 @@ export class HTMLHeadElement extends HTMLElement
     }
     public addMeta(name: string,content: string,properties: HTMLElement.Properties = {})
     {
-        const meta = new HTMLElement("meta")
-        meta.properties = {
-            name,content,
-            ...properties
-        }
-        return this.append(meta)
+        return this.append(new HTMLMetaElement(name,content,properties))
     }
     public addProperty(property: string,content: string,properties: HTMLElement.Properties = {})
     {
-        const meta = new HTMLElement("meta")
-        meta.properties = {
-            property,content,
-            ...properties
-        }
-        return this.append(meta)
+        return this.append(new HTMLPropertyElement(property,content,properties))
     }
     public addLink(rel: string,href: string,properties: HTMLElement.Properties = {})
     {
