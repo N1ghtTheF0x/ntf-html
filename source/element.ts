@@ -1,14 +1,10 @@
+import { renderChildren } from "./render"
+
 /**
  * Represents a HTML element
  */
 export class HTMLElement
 {
-    /**
-     * Internal render options of this element
-     */
-    protected _render_options: HTMLElement.IRenderOptions = {
-        noEndTag: false
-    }
     /**
      * The children of this element, can be anything. Will be stringified at render. Function can be passed to with single arguments as the parent and return type can be anything
      */
@@ -36,7 +32,7 @@ export class HTMLElement
     /**
      * The string content of this element
      */
-    public get content(){return this.renderChildren()}
+    public get content(){return renderChildren(this.children)}
     /**
      * Set the content of this element to a string
      */
@@ -124,31 +120,9 @@ export class HTMLElement
         .map(([key,value]) => `${key}="${String(value).replaceAll('"',"&quot;")}"`)
         .join(" ")
     }
-    public renderChildren()
+    public renderStartTagContent()
     {
-        let content = ""
-        for(const child of this.children)
-        {
-            if(child instanceof HTMLElement)
-            {
-                content += child.render()
-                continue
-            }
-            if(typeof child == "function")
-            {
-                content += String(child(this))
-                continue
-            }
-            content += String(child)
-        }
-        return content
-    }
-    public render()
-    {
-        const tag = `${this.type} ${this.renderProperties()}`.trim()
-        if(this._render_options.noEndTag && this.children.length === 0)
-            return `<${tag} />`
-        return `<${tag}>${this.renderChildren()}</${this.type}>`
+        return `${this.type} ${this.renderProperties()}`.trim()
     }
 }
 
@@ -156,8 +130,4 @@ export namespace HTMLElement
 {
     export type Properties = {[key: string]: any}
     export type Callback = (elm: any) => void
-    export interface IRenderOptions
-    {
-        noEndTag: boolean
-    }
 }

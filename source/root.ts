@@ -12,8 +12,9 @@ export class HTMLRootElement extends HTMLElement
         this.properties["lang"] = lang
         this.append(this.head,this.body)
     }
-    public override render(): string
-    {
-        return "<!DOCTYPE html>" + super.render()
-    }
+}
+
+export namespace HTMLRootElement
+{
+    export const HEADER = "<!DOCTYPE html>"
 }

@@ -9,12 +9,12 @@ export class HTMLMetaElement extends HTMLElement
     public constructor(name: string,content: string,properties: HTMLElement.Properties = {})
     {
         super("meta")
-        this._render_options.noEndTag = true
         this.properties = properties
         this.name = name
         this.content = content
     }
 }
+
 export class HTMLPropertyElement extends HTMLElement
 {
     public get property(){return this.properties["property"] as string}
@@ -24,9 +24,23 @@ export class HTMLPropertyElement extends HTMLElement
     public constructor(property: string,content: string,properties: HTMLElement.Properties = {})
     {
         super("meta")
-        this._render_options.noEndTag = true
         this.properties = properties
         this.property = property
         this.content = content
+    }
+}
+
+export class HTMLLinkElement extends HTMLElement
+{
+    public get rel(){return this.properties["rel"] as string}
+    public set rel(v){this.properties["rel"] = v}
+    public get href(){return this.properties["href"] as string}
+    public set href(v){this.properties["href"] = v}
+    public constructor(rel: string,href: string,properties: HTMLElement.Properties = {})
+    {
+        super("link")
+        this.properties = properties
+        this.rel = rel
+        this.href = href
     }
 }

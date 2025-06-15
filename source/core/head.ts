@@ -1,5 +1,5 @@
 import { HTMLElement } from "../element"
-import { HTMLMetaElement, HTMLPropertyElement } from "../meta"
+import { HTMLLinkElement, HTMLMetaElement, HTMLPropertyElement } from "../meta"
 
 function __charset__()
 {
@@ -29,12 +29,7 @@ export class HTMLHeadElement extends HTMLElement
     }
     public addLink(rel: string,href: string,properties: HTMLElement.Properties = {})
     {
-        const link = new HTMLElement("link")
-        link.properties = {
-            rel,href,
-            ...properties
-        }
-        return this.append(link)
+        return this.append(new HTMLLinkElement(rel,href,properties))
     }
     public addScript(src: string,properties: HTMLElement.Properties = {})
     {
