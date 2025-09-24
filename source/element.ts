@@ -1,5 +1,3 @@
-import { renderChildren } from "./render"
-
 /**
  * Represents a HTML element
  */
@@ -24,19 +22,15 @@ export class HTMLElement
     /**
      * Get a string representation of the `classList` property
      */
-    public get className(){return [...this.classList].join(" ")}
+    public get className(): string {return [...this.classList].join(" ")}
     /**
      * Set a single or multiple classes with one string
      */
     public set className(v){this.classList = new Set(v.split(" "))}
     /**
-     * The string content of this element
-     */
-    public get content(){return renderChildren(this.children)}
-    /**
      * Set the content of this element to a string
      */
-    public set content(v){this.children = [v]}
+    public set content(v: string){this.children = [v]}
     /**
      * Check if `item` is a `HTMLElement`
      * @param item Anything that might be `HTMLElement`
@@ -59,7 +53,7 @@ export class HTMLElement
      * Iterate through each child element of this element
      * @param cb The callback to call upon each element, can be anything
      */
-    public forEach(cb: HTMLElement.Callback)
+    public forEach(cb: HTMLElement.Callback): this
     {
         cb(this)
         for(const child of this.children)
@@ -68,13 +62,14 @@ export class HTMLElement
             if(child instanceof HTMLElement)
                 child.forEach(cb)
         }
+        return this
     }
     /**
      * Add new items to this element
      * @param items A list of anything
      * @returns this
      */
-    public append(...items: Array<any>)
+    public append(...items: Array<any>): this
     {
         for(const item of items)
         {
@@ -87,42 +82,27 @@ export class HTMLElement
         }
         return this
     }
-    public setClassName(className: string)
+    public setClassName(className: string): this
     {
         this.className = className
         return this
     }
-    public setId(id: string)
+    public setId(id: string): this
     {
         this.id = id
         return this
     }
-    public setData(key: string,value: any)
+    public setData(key: string,value: any): this
     {
         this.properties[`data-${key}`] = value
         return this
     }
-    public renderProperties()
+    public getData<T>(key: string): T | undefined
     {
-        const properties: HTMLElement.Properties = {}
-        for(const [key,value] of Object.entries(this.properties))
-        {
-            if(typeof value == "undefined" || value === null) continue
-            if(typeof value == "string" && value.length === 0)
-                continue
-            properties[key] = value
-        }
-        if(typeof this.id == "string")
-            properties["id"] = this.id
-        if(this.classList.size > 0)
-            properties["class"] = this.className
-        return Object.entries(properties)
-        .map(([key,value]) => `${key}="${String(value).replaceAll('"',"&quot;")}"`)
-        .join(" ")
-    }
-    public renderStartTagContent()
-    {
-        return `${this.type} ${this.renderProperties()}`.trim()
+        const k = `data-${key}`
+        if(k in this.properties)
+            return this.properties[key]
+        return undefined
     }
 }
 
