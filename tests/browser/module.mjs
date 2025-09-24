@@ -1,3 +1,3 @@
+import * as _ from "/index.mjs"
 /** @type {import("../../dist/index.mjs")} */
-import * as module from "/index.mjs"
-console.dir(module)
+Object.defineProperty(globalThis,"@ntf/html",{value: _})

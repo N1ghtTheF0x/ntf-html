@@ -7,7 +7,7 @@
             "url": "http://localhost:43434/test.html",
             "name": "Test Browser",
             "server":{
-                "program": "server.js"
+                "program": "${workspaceFolder}/scripts/server.cjs"
             }
         },
         {
