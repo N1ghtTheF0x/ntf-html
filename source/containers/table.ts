@@ -1,4 +1,4 @@
-import { HTMLElement } from "./element"
+import { HTMLElement } from "../element"
 
 export class HTMLTableElement extends HTMLElement
 {
@@ -11,13 +11,13 @@ export class HTMLTableElement extends HTMLElement
     {
         return super.append(...items)
     }
-    public addHead(...rows: Array<HTMLTableRowElement>)
+    public addHead(...rows: Array<HTMLTableRowElement>): HTMLTableContentElement
     {
         const head = new HTMLTableContentElement("thead",...rows)
         this.append(head)
         return head
     }
-    public addBody(...rows: Array<HTMLTableRowElement>)
+    public addBody(...rows: Array<HTMLTableRowElement>): HTMLTableContentElement
     {
         const body = new HTMLTableContentElement("tbody",...rows)
         this.append(body)
@@ -36,7 +36,7 @@ export class HTMLTableContentElement extends HTMLElement
     {
         return super.append(...items)
     }
-    public addRow(...children: Array<HTMLTableRowChildren>)
+    public addRow(...children: Array<HTMLTableRowChildren>): HTMLTableRowElement
     {
         const row = new HTMLTableRowElement(...children)
         this.append(row)
@@ -55,7 +55,7 @@ export class HTMLTableRowElement extends HTMLElement
     {
         return super.append(...items)
     }
-    public addHeading(children: Array<any>,scope?: HTMLTableHeadingElement["scope"])
+    public addHeading(children: Array<any>,scope?: HTMLTableHeadingElement["scope"]): HTMLTableHeadingElement
     {
         const heading = new HTMLTableHeadingElement(...children)
         if(typeof scope == "string")
@@ -63,7 +63,7 @@ export class HTMLTableRowElement extends HTMLElement
         this.append(heading)
         return heading
     }
-    public addCell(...children: Array<any>)
+    public addCell(...children: Array<any>): HTMLTableCellElement
     {
         const cell = new HTMLTableCellElement(...children)
         this.append(cell)

@@ -1,6 +1,6 @@
-import { HTMLElement } from "./element"
-import { HTMLBodyElement } from "./core/body"
-import { HTMLHeadElement } from "./core/head"
+import { HTMLBodyElement } from "../core/body"
+import { HTMLHeadElement } from "../core/head"
+import { HTMLElement } from "../element"
 
 export class HTMLRootElement extends HTMLElement
 {
