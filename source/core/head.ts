@@ -1,12 +1,7 @@
 import { HTMLElement } from "../element"
-import { HTMLLinkElement, HTMLMetaElement, HTMLPropertyElement } from "../meta"
-
-function __charset__()
-{
-    const meta = new HTMLElement("meta")
-    meta.properties["charset"] = "UTF-8"
-    return meta
-}
+import { HTMLLinkElement } from "./head/link"
+import { HTMLCharSetElement, HTMLMetaElement, HTMLPropertyElement } from "./head/meta"
+import { HTMLScriptElement } from "./head/script"
 
 export class HTMLHeadElement extends HTMLElement
 {
@@ -16,31 +11,89 @@ export class HTMLHeadElement extends HTMLElement
     public constructor()
     {
         super("head")
-        this.append(__charset__(),this.titleElement)
-        this.addMeta("viewport","width=device-width, initial-scale=1.0")
+        this.addCharset("UTF-8")
+        this.append(this.titleElement)
+        this.addMetaViewport({
+            width: "device-width",
+            initialScale: 1.0
+        })
+        this.addMetaGenerator(`${PKG_NAME} v${PKG_VERSION}`)
     }
-    public addMeta(name: string,content: string,properties: HTMLElement.Properties = {})
+    public addCharset(...args: ConstructorParameters<typeof HTMLCharSetElement>): this
     {
-        return this.append(new HTMLMetaElement(name,content,properties))
+        return this.append(new HTMLCharSetElement(...args))
     }
-    public addProperty(property: string,content: string,properties: HTMLElement.Properties = {})
+    public addMeta(...args: ConstructorParameters<typeof HTMLMetaElement>): this
     {
-        return this.append(new HTMLPropertyElement(property,content,properties))
+        return this.append(new HTMLMetaElement(...args))
     }
-    public addLink(rel: string,href: string,properties: HTMLElement.Properties = {})
+    public addMetaApplicationName(...args: ConstructorParameters<typeof HTMLMetaElement.ApplicationNameElement>): this
     {
-        return this.append(new HTMLLinkElement(rel,href,properties))
+        return this.append(new HTMLMetaElement.ApplicationNameElement(...args))
     }
-    public addScript(src: string,properties: HTMLElement.Properties = {})
+    public addMetaColorScheme(...args: ConstructorParameters<typeof HTMLMetaElement.ColorSchemeElement>): this
     {
-        const script = new HTMLElement("script")
-        script.properties = {
-            src,
-            ...properties
-        }
+        return this.append(new HTMLMetaElement.ColorSchemeElement(...args))
+    }
+    public addMetaDescription(...args: ConstructorParameters<typeof HTMLMetaElement.DescriptionElement>): this
+    {
+        return this.append(new HTMLMetaElement.DescriptionElement(...args))
+    }
+    public addMetaGenerator(...args: ConstructorParameters<typeof HTMLMetaElement.GeneratorElement>): this
+    {
+        return this.append(new HTMLMetaElement.GeneratorElement(...args))
+    }
+    public addMetaKeywords(...args: ConstructorParameters<typeof HTMLMetaElement.KeywordsElement>): this
+    {
+        return this.append(new HTMLMetaElement.KeywordsElement(...args))
+    }
+    public addMetaReferrer(...args: ConstructorParameters<typeof HTMLMetaElement.ReferrerElement>): this
+    {
+        return this.append(new HTMLMetaElement.ReferrerElement(...args))
+    }
+    public addMetaThemeColor(...args: ConstructorParameters<typeof HTMLMetaElement.ThemeColorElement>): this
+    {
+        return this.append(new HTMLMetaElement.ThemeColorElement(...args))
+    }
+    public addMetaViewport(...args: ConstructorParameters<typeof HTMLMetaElement.ViewportElement>): this
+    {
+        return this.append(new HTMLMetaElement.ViewportElement(...args))
+    }
+    public addMetaCreator(...args: ConstructorParameters<typeof HTMLMetaElement.CreatorElement>): this
+    {
+        return this.append(new HTMLMetaElement.CreatorElement(...args))
+    }
+    public addMetaGoogleBot(...args: ConstructorParameters<typeof HTMLMetaElement.GoogleBotElement>): this
+    {
+        return this.append(new HTMLMetaElement.GoogleBotElement(...args))
+    }
+    public addMetaPublisher(...args: ConstructorParameters<typeof HTMLMetaElement.PublisherElement>): this
+    {
+        return this.append(new HTMLMetaElement.PublisherElement(...args))
+    }
+    public addMetaRobots(...args: ConstructorParameters<typeof HTMLMetaElement.RobotsElement>): this
+    {
+        return this.append(new HTMLMetaElement.RobotsElement(...args))
+    }
+    public addProperty(...args: ConstructorParameters<typeof HTMLPropertyElement>): this
+    {
+        return this.append(new HTMLPropertyElement(...args))
+    }
+    public addLink(...args: ConstructorParameters<typeof HTMLLinkElement>): this
+    {
+        return this.append(new HTMLLinkElement(...args))
+    }
+    public addScript(src: string,module?: boolean): this
+    {
+        return this.append(new HTMLScriptElement(src,module))
+    }
+    public addScriptInline(content: string,module?: boolean): this
+    {
+        const script = new HTMLScriptElement(undefined,module)
+        script.content = content
         return this.append(script)
     }
-    public setTitle(title: string)
+    public setTitle(title: string): this
     {
         this.title = title
         return this
