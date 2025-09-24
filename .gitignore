@@ -131,3 +131,7 @@ dist
 
 # Compiled output
 dist
+
+# Generated code
+
+/source/mime.ts
