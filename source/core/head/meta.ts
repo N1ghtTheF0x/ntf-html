@@ -161,6 +161,96 @@ export class HTMLPropertyElement extends HTMLElement
     }
 }
 
+export namespace HTMLPropertyElement
+{
+    export type OpenGraphType = ""
+    export type Determiner = "a" | "an" | "the" | "" | "auto"
+    export class TitleElement extends HTMLPropertyElement
+    {
+        public constructor(title: string)
+        {
+            super("og:title",title)
+        }
+    }
+    export class TypeElement extends HTMLPropertyElement
+    {
+        public constructor(type: OpenGraphType)
+        {
+            super("og:type",type)
+        }
+    }
+    export class ImageElement extends HTMLPropertyElement
+    {
+        public constructor(url: string)
+        {
+            super("og:image",url)
+        }
+    }
+    export class UrlElement extends HTMLPropertyElement
+    {
+        public constructor(url: string)
+        {
+            super("og:url",url)
+        }
+    }
+    export class AudioElement extends HTMLPropertyElement
+    {
+        public constructor(url: string)
+        {
+            super("og:audio",url)
+        }
+    }
+    export namespace AudioElement
+    {
+        export class UrlElement extends AudioElement
+        {
+            
+        }
+    }
+    export class DescriptionElement extends HTMLPropertyElement
+    {
+        public constructor(description: string)
+        {
+            super("og:description",description)
+        }
+    }
+    export class DeterminerElement extends HTMLPropertyElement
+    {
+        public constructor(determiner: Determiner)
+        {
+            super("og:determiner",determiner)
+        }
+    }
+    export class LocaleElement extends HTMLPropertyElement
+    {
+        public constructor(locale: string)
+        {
+            super("og:locale",locale)
+        }
+    }
+    export class LocaleAlternateElement extends HTMLPropertyElement
+    {
+        public constructor(locale: string)
+        {
+            super("og:locale:alternate",locale)
+        }
+    }
+    export class SiteNameElement extends HTMLPropertyElement
+    {
+        public constructor(name: string)
+        {
+            super("og:site_name",name)
+        }
+    }
+    export class VideoElement extends HTMLPropertyElement
+    {
+        public constructor(url: string)
+        {
+            super("og:video",url)
+        }
+    }
+}
+
 export class HTMLCharSetElement extends HTMLElement
 {
     public get charset(): HTMLCharSetElement.CharSet {return String(this.properties["charset"]) as HTMLCharSetElement.CharSet}
