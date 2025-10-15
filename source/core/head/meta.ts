@@ -200,13 +200,6 @@ export namespace HTMLPropertyElement
             super("og:audio",url)
         }
     }
-    export namespace AudioElement
-    {
-        export class UrlElement extends AudioElement
-        {
-            
-        }
-    }
     export class DescriptionElement extends HTMLPropertyElement
     {
         public constructor(description: string)

@@ -1,6 +1,6 @@
 {
   "name": "@ntf/html",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "platform-independent HTML library",
   "files": [
     "dist"
