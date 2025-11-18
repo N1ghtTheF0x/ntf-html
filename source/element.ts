@@ -1,3 +1,5 @@
+import { AutoCapitalize } from "./attributes"
+
 /**
  * Represents a HTML element
  */
@@ -31,6 +33,12 @@ export class HTMLElement
      * Set the content of this element to a string
      */
     public set content(v: string){this.children = [v]}
+    public get accesskey(): string {return String(this.properties["accesskey"])}
+    public set accesskey(v: string){this.properties["accesskey"] = v}
+    public get anchor(): string {return String(this.properties["anchor"])}
+    public set anchor(v: string){this.properties["anchor"] = v}
+    public get autoCapitalize(): AutoCapitalize {return String(this.properties["autocapitalize"]) as AutoCapitalize}
+    public set autoCapitalize(v: AutoCapitalize){this.properties["autocapitalize"] = v}
     /**
      * Check if `item` is a `HTMLElement`
      * @param item Anything that might be `HTMLElement`
@@ -87,22 +95,34 @@ export class HTMLElement
         this.className = className
         return this
     }
+    public addClassName(...classNames: Array<string>): this
+    {
+        this.classList = new Set([...this.classList,...classNames])
+        return this
+    }
     public setId(id: string): this
     {
         this.id = id
         return this
     }
+    public setProperty(key: string,value: any): this
+    {
+        this.properties[key] = value
+        return this
+    }
+    public getProperty<T>(key: string): T | undefined
+    {
+        if(key in this.properties)
+            return this.properties[key]
+        return undefined
+    }
     public setData(key: string,value: any): this
     {
-        this.properties[`data-${key}`] = value
-        return this
+        return this.setProperty(`data-${key}`,value)
     }
     public getData<T>(key: string): T | undefined
     {
-        const k = `data-${key}`
-        if(k in this.properties)
-            return this.properties[key]
-        return undefined
+        return this.getProperty<T>(`data-${key}`)
     }
 }
 

@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/N1ghtTheF0x/ntf-html#readme",
   "devDependencies": {
+    "@swc/core": "latest",
     "express": "latest",
     "tsup": "latest",
     "tsx": "latest",

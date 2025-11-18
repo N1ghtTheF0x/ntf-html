@@ -2,7 +2,7 @@ import { HTMLElement } from "../element"
 
 export class HTMLListElement extends HTMLElement
 {
-    public readonly type: HTMLListElement.Type
+    public override readonly type: HTMLListElement.Type
     public constructor(type: HTMLListElement.Type)
     {
         super(type)
